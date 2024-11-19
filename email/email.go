@@ -19,6 +19,7 @@ func NewClient() (client *mail.Client, err error) {
 		mail.WithPort(587),
 		mail.WithSMTPAuth(mail.SMTPAuthPlain),
 		mail.WithUsername(SMTPUsername),
+		mail.WithPassword(SMTPPassword),
 		mail.WithTLSPolicy(mail.TLSMandatory), // mail.WithTLSPolicy(mail.TLSOpportunistic)
 	)
 
