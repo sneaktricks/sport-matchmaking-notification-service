@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sport-matchmaking-notification-service
+spec:
+  selector:
+    matchLabels:
+      app: sport-matchmaking-notification-service
+  template:
+    metadata:
+      labels:
+        app: sport-matchmaking-notification-service
+    spec:
+      containers:
+      - name: sport-matchmaking-notification-service
+        image: sport-matchmaking-notification-service:latest
+        imagePullPolicy: Never
+        resources:
+          requests:
+            cpu: 100m
+            memory: "16Mi"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
+        env:
+          - name: KEYCLOAK_URL
+            valueFrom:
+              secretKeyRef:
+                name: notification-service-keycloak-credentials
+                key: url
+          - name: KEYCLOAK_REALM
+            valueFrom:
+              secretKeyRef:
+                name: notification-service-keycloak-credentials
+                key: realm
+          - name: KEYCLOAK_CLIENT_ID
+            valueFrom:
+              secretKeyRef:
+                name: notification-service-keycloak-credentials
+                key: clientId
+          - name: KEYCLOAK_CLIENT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: notification-service-keycloak-credentials
+                key: clientSecret
+          - name: SMTP_HOST
+            valueFrom:
+              secretKeyRef:
+                name: notification-service-smtp-credentials
+                key: host
+          - name: SMTP_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: notification-service-smtp-credentials
+                key: username
+          - name: SMTP_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: notification-service-smtp-credentials
+                key: password
