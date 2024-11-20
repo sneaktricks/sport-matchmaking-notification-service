@@ -25,6 +25,8 @@ func (h *Handler) NotifyUsersAboutMatchUpdate(c echo.Context) error {
 	token, err := h.goCloakClient.GetToken(c.Request().Context(), auth.Realm, gocloak.TokenOptions{
 		ClientID:     &auth.ClientID,
 		ClientSecret: &auth.ClientSecret,
+		GrantType:    gocloak.StringP("urn:ietf:params:oauth:grant-type:uma-ticket"),
+		Audience:     gocloak.StringP(auth.ClientID),
 	})
 	if err != nil {
 		log.Logger.Error("failed to retrieve token", slog.String("error", err.Error()))
@@ -33,12 +35,13 @@ func (h *Handler) NotifyUsersAboutMatchUpdate(c echo.Context) error {
 
 	// Retrieve users with verified emails
 	users, err := h.goCloakClient.GetUsers(c.Request().Context(), token.AccessToken, auth.Realm, gocloak.GetUsersParams{
-		EmailVerified: gocloak.BoolP(true),
+		// EmailVerified: gocloak.BoolP(true),
 	})
 	if err != nil {
 		log.Logger.Error("failed to retrieve users from Keycloak", slog.String("error", err.Error()))
 		return echo.NewHTTPError(http.StatusInternalServerError)
 	}
+	log.Logger.Debug("Found users", slog.Any("users", users))
 
 	// Collect users to notify
 	usersToNotify := make([]*gocloak.User, 0)
@@ -49,6 +52,7 @@ func (h *Handler) NotifyUsersAboutMatchUpdate(c echo.Context) error {
 			}
 		}
 	}
+	log.Logger.Debug("Users to notify", slog.Any("users", usersToNotify))
 
 	// Send notification to users specified in NotificationDetails
 	h.notificationClient.SendMatchUpdateNotificationToUsers(

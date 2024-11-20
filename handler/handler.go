@@ -31,6 +31,6 @@ func (h *Handler) RegisterRoutes(g *echo.Group) {
 		return c.JSON(http.StatusOK, model.TimeResponse{Time: time.Now().UTC()})
 	})
 
-	matchGroup := g.Group("/notify")
-	matchGroup.GET("", h.NotifyUsersAboutMatchUpdate)
+	notifyGroup := g.Group("/notify")
+	notifyGroup.POST("", h.NotifyUsersAboutMatchUpdate)
 }

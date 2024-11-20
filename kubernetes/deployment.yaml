@@ -45,18 +45,19 @@ spec:
               secretKeyRef:
                 name: notification-service-keycloak-credentials
                 key: clientSecret
-          - name: SMTP_HOST
-            valueFrom:
-              secretKeyRef:
-                name: notification-service-smtp-credentials
-                key: host
-          - name: SMTP_USERNAME
-            valueFrom:
-              secretKeyRef:
-                name: notification-service-smtp-credentials
-                key: username
-          - name: SMTP_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: notification-service-smtp-credentials
-                key: password
+          # TODO: Uncomment once credentials secret exists
+          # - name: SMTP_HOST
+          #   valueFrom:
+          #     secretKeyRef:
+          #       name: notification-service-smtp-credentials
+          #       key: host
+          # - name: SMTP_USERNAME
+          #   valueFrom:
+          #     secretKeyRef:
+          #       name: notification-service-smtp-credentials
+          #       key: username
+          # - name: SMTP_PASSWORD
+          #   valueFrom:
+          #     secretKeyRef:
+          #       name: notification-service-smtp-credentials
+          #       key: password
