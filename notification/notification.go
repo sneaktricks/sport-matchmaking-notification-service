@@ -3,6 +3,8 @@ package notification
 import (
 	"context"
 	"fmt"
+	"html/template"
+	stdlog "log"
 	"log/slog"
 	"time"
 
@@ -12,6 +14,16 @@ import (
 	"github.com/sneaktricks/sport-matchmaking-notification-service/model"
 	"github.com/wneessen/go-mail"
 )
+
+var matchUpdateEmailTemplate *template.Template
+
+func init() {
+	var err error
+	matchUpdateEmailTemplate, err = template.ParseFiles("template/match-update-email.html.tmpl")
+	if err != nil {
+		stdlog.Fatalf("Failed to parse match update email template: %s", err.Error())
+	}
+}
 
 type NotificationClient interface {
 	SendMatchUpdateNotificationToUsers(ctx context.Context, users []*gocloak.User, details model.MatchDetails) error
@@ -41,8 +53,10 @@ func (enc *EmailNotificationClient) SendMatchUpdateNotificationToUsers(ctx conte
 				details.ID,
 			),
 		)
-		// TODO: Create template
-		// msg.SetBodyHTMLTemplate()
+		msg.SetBodyHTMLTemplate(matchUpdateEmailTemplate, model.MatchUpdateTemplateData{
+			MatchDetails: details,
+			Recipient:    user,
+		})
 
 		messages[i] = msg
 	}

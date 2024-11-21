@@ -2,6 +2,8 @@ package model
 
 import (
 	"time"
+
+	"github.com/Nerzal/gocloak/v13"
 )
 
 type NotificationDetails struct {
@@ -23,4 +25,9 @@ type MatchDetails struct {
 	Level             string    `json:"level"`
 	ChatLink          string    `json:"chatLink"`
 	HostUserID        string    `json:"hostUserId"`
+}
+
+type MatchUpdateTemplateData struct {
+	MatchDetails
+	Recipient *gocloak.User
 }

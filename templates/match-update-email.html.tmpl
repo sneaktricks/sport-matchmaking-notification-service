@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .Sport }} Match Update</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .email-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .content h2 {
+            font-size: 20px;
+            color: #333333;
+            margin-top: 0;
+        }
+
+        .content p {
+            font-size: 16px;
+            color: #666666;
+            line-height: 1.6;
+        }
+
+        .match-details {
+            background-color: #f9f9f9;
+            border: 1px solid #dddddd;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .match-details p {
+            margin: 8px 0;
+            font-size: 15px;
+        }
+
+        .cta-button {
+            display: block;
+            text-align: center;
+            margin: 20px auto;
+        }
+
+        .cta-button a {
+            text-decoration: none;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+        .cta-button a:hover {
+            background-color: #0056b3;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 14px;
+            color: #888888;
+            margin: 20px 0;
+        }
+
+        .footer a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="email-container">
+        <div class="header">
+            <h1>{{ .Sport }} Match Update</h1>
+        </div>
+        <div class="content">
+            <h2>Dear {{ .Recipient.FirstName }},</h2>
+            <p>Your upcoming {{ .Sport }} match (ID {{ .ID }}) has been updated. Please see the updated match details below:</p>
+            <div class="match-details">
+                <p><strong>Sport:</strong> {{ .Sport }}</p>
+                <p><strong>Participants:</strong> {{ .MinParticipants }}-{{ .MaxParticipants }}</p>
+                <p><strong>Starts at:</strong> {{ .StartsAt }}</p>
+                <p><strong>Ends at:</strong> {{ .EndsAt }}</p>
+                <p><strong>Location:</strong> {{ .Location }}</p>
+                <p><strong>Participation fee:</strong> {{ .ParticipationFee }}</p>
+                <p>
+                    <strong>Required equipment:</strong>
+                    {{ if .RequiredEquipment }}
+                        <ul>
+                            {{ range .RequiredEquipment }}
+                                <li>{{ . }}</li>
+                            {{ end }}
+                        </ul>
+                    {{ else }}
+                        <span>None</span>
+                    {{ end }}
+                    </p>
+                <p><strong>Level:</strong> {{ .Level }}</p>
+                <p><strong>Chat link:</strong> {{ .ChatLink }}</p>
+                <p><strong>Additional information:</strong> {{ .Description }}</p>
+            </div>
+            <p>If you have any questions about these updates, please contact your match host.</p>
+            <p>Best regards,<br/>The Sport Matchmaking Team</p>
+        </div>
+        <div class="footer">
+            <p>Do not reply to this email.</p>
+            <p>Thank you for using Sport Matchmaking!</p>
+            <p><a href="[Support Link]">Contact Support</a> | <a href="[Unsubscribe Link]">Unsubscribe</a></p>
+        </div>
+    </div>
+</body>
+
+</html>
