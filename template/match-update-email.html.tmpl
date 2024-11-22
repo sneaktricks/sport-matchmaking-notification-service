@@ -127,9 +127,16 @@
                     {{ else }}
                         <span>None</span>
                     {{ end }}
-                    </p>
+                </p>
                 <p><strong>Level:</strong> {{ .Level }}</p>
-                <p><strong>Chat link:</strong> {{ .ChatLink }}</p>
+                <p>
+                    <strong>Chat link: </strong> 
+                    {{ if .ChatLink }}
+                        <a href="{{ .ChatLink }}">{{ .ChatLink }}</a>
+                    {{ else }}
+                        <none provided>
+                    {{ end }}
+                </p>
                 <p><strong>Additional information:</strong></p>
                 <p>{{ .Description }}</p>
             </div>
