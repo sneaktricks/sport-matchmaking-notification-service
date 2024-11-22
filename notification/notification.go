@@ -53,10 +53,7 @@ func (enc *EmailNotificationClient) SendMatchUpdateNotificationToUsers(ctx conte
 				details.ID,
 			),
 		)
-		msg.SetBodyHTMLTemplate(matchUpdateEmailTemplate, model.MatchUpdateTemplateData{
-			MatchDetails: details,
-			Recipient:    user,
-		})
+		msg.SetBodyHTMLTemplate(matchUpdateEmailTemplate, model.NewMatchUpdateTemplateData(details, user))
 
 		messages[i] = msg
 	}

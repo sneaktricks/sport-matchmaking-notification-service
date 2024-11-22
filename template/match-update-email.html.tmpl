@@ -110,11 +110,12 @@
             <p>Your upcoming {{ .Sport }} match (ID {{ .ID }}) has been updated. Please see the updated match details below:</p>
             <div class="match-details">
                 <p><strong>Sport:</strong> {{ .Sport }}</p>
-                <p><strong>Participants:</strong> {{ .MinParticipants }}-{{ .MaxParticipants }}</p>
-                <p><strong>Starts at:</strong> {{ .StartsAt }}</p>
-                <p><strong>Ends at:</strong> {{ .EndsAt }}</p>
+                <p><strong>Participants:</strong> {{ .FormattedParticipantsRange }}</p>
+                <p><strong>Starts at:</strong> {{ .FormattedStartsAt }}</p>
+                <p><strong>Ends at:</strong> {{ .FormattedEndsAt }}</p>
+                <p><strong>Duration:</strong> {{ .FormattedDuration }}</p>
                 <p><strong>Location:</strong> {{ .Location }}</p>
-                <p><strong>Participation fee:</strong> {{ .ParticipationFee }}</p>
+                <p><strong>Participation fee:</strong> {{ .FormattedParticipationFee }}</p>
                 <p>
                     <strong>Required equipment:</strong>
                     {{ if .RequiredEquipment }}
@@ -129,15 +130,15 @@
                     </p>
                 <p><strong>Level:</strong> {{ .Level }}</p>
                 <p><strong>Chat link:</strong> {{ .ChatLink }}</p>
-                <p><strong>Additional information:</strong> {{ .Description }}</p>
+                <p><strong>Additional information:</strong></p>
+                <p>{{ .Description }}</p>
             </div>
             <p>If you have any questions about these updates, please contact your match host.</p>
             <p>Best regards,<br/>The Sport Matchmaking Team</p>
         </div>
         <div class="footer">
-            <p>Do not reply to this email.</p>
+            <p>Do not reply to this automated email.</p>
             <p>Thank you for using Sport Matchmaking!</p>
-            <p><a href="[Support Link]">Contact Support</a> | <a href="[Unsubscribe Link]">Unsubscribe</a></p>
         </div>
     </div>
 </body>
