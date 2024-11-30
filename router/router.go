@@ -21,7 +21,7 @@ func New() *echo.Echo {
 	e.Use(middleware.KeyAuthWithConfig(middleware.KeyAuthConfig{
 		KeyLookup: "header:X-API-KEY",
 		Validator: func(key string, c echo.Context) (bool, error) {
-			return subtle.ConstantTimeCompare([]byte(key), []byte(auth.MatchServiceAPIKey)) == 1, nil
+			return subtle.ConstantTimeCompare([]byte(key), []byte(auth.MatchServiceClientAPIKey)) == 1, nil
 		},
 	}))
 

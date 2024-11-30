@@ -6,15 +6,15 @@ import (
 )
 
 var (
-	MatchServiceAPIKey = os.Getenv("MATCH_SERVICE_API_KEY")
-	MatchServiceURL    = os.Getenv("MATCH_SERVICE_URL")
+	MatchServiceClientAPIKey = os.Getenv("MATCH_SERVICE_CLIENT_API_KEY")
+	MatchServiceURL          = os.Getenv("MATCH_SERVICE_URL")
 )
 
 func init() {
 	if MatchServiceURL == "" {
 		log.Fatal("Environment variable MATCH_SERVICE_URL is undefined")
 	}
-	if MatchServiceAPIKey == "" {
-		log.Fatal("Environment variable MATCH_SERVICE_API_KEY is undefined")
+	if MatchServiceClientAPIKey == "" {
+		log.Fatal("Environment variable MATCH_SERVICE_CLIENT_API_KEY is undefined")
 	}
 }
