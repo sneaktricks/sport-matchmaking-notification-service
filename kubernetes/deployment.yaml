@@ -25,6 +25,8 @@ spec:
         ports:
         - containerPort: 8080
         env:
+          - name: MATCH_SERVICE_URL
+            value: "http://sport-matchmaking-match-service-service:8080"
           - name: KEYCLOAK_URL
             valueFrom:
               secretKeyRef:
