@@ -11,6 +11,7 @@ spec:
       labels:
         app: sport-matchmaking-notification-service
     spec:
+      automountServiceAccountToken: false
       containers:
       - name: sport-matchmaking-notification-service
         image: sport-matchmaking-notification-service:latest
@@ -19,9 +20,11 @@ spec:
           requests:
             cpu: 100m
             memory: "16Mi"
+            ephemeral-storage: "64Mi"
           limits:
             memory: "128Mi"
             cpu: "500m"
+            ephemeral-storage: "1Gi"
         ports:
         - containerPort: 8080
         env:
