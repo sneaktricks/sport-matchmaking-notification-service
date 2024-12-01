@@ -20,7 +20,7 @@ func NewClient() (client *mail.Client, err error) {
 		mail.WithSMTPAuth(mail.SMTPAuthPlain),
 		mail.WithUsername(SMTPUsername),
 		mail.WithPassword(SMTPPassword),
-		mail.WithTLSPolicy(mail.TLSMandatory), // mail.WithTLSPolicy(mail.TLSOpportunistic)
+		mail.WithTLSPolicy(mail.TLSMandatory),
 	)
 
 	return client, err

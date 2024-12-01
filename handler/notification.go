@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"context"
 	"log/slog"
 	"net/http"
 
@@ -55,8 +56,9 @@ func (h *Handler) NotifyUsersAboutMatchUpdate(c echo.Context) error {
 	log.Logger.Debug("Users to notify", slog.Any("users", usersToNotify))
 
 	// Send notification to users specified in NotificationDetails
-	h.notificationClient.SendMatchUpdateNotificationToUsers(
-		c.Request().Context(),
+	ctx := context.Background()
+	go h.notificationClient.SendMatchUpdateNotificationToUsers(
+		ctx,
 		usersToNotify,
 		notificationDetails.MatchDetails,
 	)
