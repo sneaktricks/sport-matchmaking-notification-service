@@ -30,6 +30,11 @@ spec:
         env:
           - name: MATCH_SERVICE_URL
             value: "http://sport-matchmaking-match-service-service:8080"
+          - name: MATCH_SERVICE_CLIENT_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: notification-service-match-service-secret
+                key: apiKey
           - name: KEYCLOAK_URL
             valueFrom:
               secretKeyRef:
@@ -50,19 +55,18 @@ spec:
               secretKeyRef:
                 name: notification-service-keycloak-credentials
                 key: clientSecret
-          # TODO: Uncomment once credentials secret exists
-          # - name: SMTP_HOST
-          #   valueFrom:
-          #     secretKeyRef:
-          #       name: notification-service-smtp-credentials
-          #       key: host
-          # - name: SMTP_USERNAME
-          #   valueFrom:
-          #     secretKeyRef:
-          #       name: notification-service-smtp-credentials
-          #       key: username
-          # - name: SMTP_PASSWORD
-          #   valueFrom:
-          #     secretKeyRef:
-          #       name: notification-service-smtp-credentials
-          #       key: password
+          - name: SMTP_HOST
+            valueFrom:
+              secretKeyRef:
+                name: notification-service-smtp-credentials
+                key: host
+          - name: SMTP_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: notification-service-smtp-credentials
+                key: username
+          - name: SMTP_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: notification-service-smtp-credentials
+                key: password
