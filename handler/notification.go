@@ -36,7 +36,7 @@ func (h *Handler) NotifyUsersAboutMatchUpdate(c echo.Context) error {
 
 	// Retrieve users with verified emails
 	users, err := h.goCloakClient.GetUsers(c.Request().Context(), token.AccessToken, auth.Realm, gocloak.GetUsersParams{
-		// EmailVerified: gocloak.BoolP(true),
+		EmailVerified: gocloak.BoolP(true),
 	})
 	if err != nil {
 		log.Logger.Error("failed to retrieve users from Keycloak", slog.String("error", err.Error()))
