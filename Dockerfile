@@ -16,6 +16,8 @@ FROM alpine:3.20
 
 COPY --from=builder /go/bin/app/sport-matchmaking-notification-service /app
 
+COPY --from=builder /go/src/app/template /template/
+
 ENTRYPOINT [ "/app", "--port", "8080" ]
 
 EXPOSE 8080
